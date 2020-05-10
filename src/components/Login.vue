@@ -57,12 +57,15 @@
 
 <script>
   export default {
-    data: function () {
+    data(){
       const reg = /(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%^&*?]{6,18}$/
       var validatePass = (rule, value, callback) => {
         if (!reg.test(value)) {
           callback(new Error('请输入密码,密码由6-12位数字、字母或字符组成！'))
         } else {
+          if (this.registerForm.password !== '') {
+            this.$refs.registerFormRef.validateField('repassword')
+          }
           callback()
         }
       }
@@ -165,7 +168,8 @@
           const result = await this.axios.post('user/register', params)
           if (result.meta.status === 200) {
             this.$message.success('注册成功！')
-            this.$router.push('/login')
+            // 刷新页面
+            this.$router.go(0)
           } else {
             this.$message.error('注册失败！')
           }

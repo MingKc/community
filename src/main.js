@@ -28,7 +28,15 @@ axios.interceptors.request.use(function (config) {
 // axios响应拦截器   隐藏进度条NProgress.done()
 axios.interceptors.response.use(function (result) {
   NProgress.done()
-  return result.data
+  const data = result.data
+  if(data.meta.msg === '无效token!'){
+    alert("登录过期，请重新登录")
+    // 清空session
+    window.sessionStorage.clear()
+    router.push('/login')
+  }else{
+    return data
+  }
 }, function (error) {
     return Promise.reject(error)
 })
