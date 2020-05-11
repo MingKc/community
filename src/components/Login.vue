@@ -150,7 +150,7 @@
             // 跳转到首页
             this.$router.push('/home')
           } else {
-            this.$message.error('登录失败！')
+            this.$message.error('登录失败！用户名或密码错误！')
           }
         }
       })

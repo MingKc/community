@@ -3,7 +3,7 @@
         <!-- 面包屑导航 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/">健康信息</a></el-breadcrumb-item>
+            <el-breadcrumb-item><a href="/health">健康信息</a></el-breadcrumb-item>
             <el-breadcrumb-item><a href="/">健康评估</a></el-breadcrumb-item>
         </el-breadcrumb>
 
@@ -14,18 +14,18 @@
             </el-rate>
             <h1>评估建议：</h1>
             <el-row :gutter="20">
-                <el-col :span="12">
+                <el-col :xs="24" :sm="12">
                     <el-card :key="index" v-for="(item,index) in suggest">
                         <h3 v-if="index === 0">运动</h3>
+                        <el-divider v-if="index !== 0"></el-divider>
                         <h4>{{index+1}}、{{item.suggest}}</h4>
-                        <el-divider v-if="index !== suggest.length-1"></el-divider>
                     </el-card>
                 </el-col>
-                <el-col :span="12">
+                <el-col :xs="24" :sm="12">
                     <el-card :key="index" v-for="(item,index) in suggest">
                         <h3 v-if="index === 0">饮食</h3>
+                        <el-divider v-if="index !== 0"></el-divider>
                         <h4>{{index+1}}、{{item.suggest}}</h4>
-                        <el-divider v-if="index !== suggest.length-1"></el-divider>
                     </el-card>
                 </el-col>
             </el-row>
