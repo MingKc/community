@@ -41,7 +41,8 @@ import {
   Rate,
   Divider,
   Carousel,
-  CarouselItem
+  CarouselItem,
+  InputNumber
 } from 'element-ui'
 
 Vue.use(Button)
@@ -84,6 +85,7 @@ Vue.use(Rate)
 Vue.use(Divider)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(InputNumber)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
