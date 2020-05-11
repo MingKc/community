@@ -39,7 +39,9 @@ import {
   Checkbox,
   Upload,
   Rate,
-  Divider
+  Divider,
+  Carousel,
+  CarouselItem
 } from 'element-ui'
 
 Vue.use(Button)
@@ -80,6 +82,8 @@ Vue.use(Checkbox)
 Vue.use(Upload)
 Vue.use(Rate)
 Vue.use(Divider)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
