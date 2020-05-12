@@ -7,6 +7,7 @@ import Health from '../components/Health/Health.vue'
 import Estimate from '../components/Health/Estimate.vue'
 import History from '../components/Health/History.vue'
 import Food from '../components/Food/Food.vue'
+import Order from '../components/Order/Order.vue'
 
 Vue.use(VueRouter)
 
@@ -23,7 +24,8 @@ const router = new VueRouter({
             { path: '/health', component: Health },
             { path: '/estimate', component: Estimate },
             { path: '/History', component: History },
-            { path: '/food', component: Food }
+            { path: '/food', component: Food },
+            { path: '/order', component: Order }
     ]}
   ]
 })
