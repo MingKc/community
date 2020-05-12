@@ -30,150 +30,71 @@
                     <img src="http://localhost:80/server/public/image/banner6.png">
                 </el-carousel-item>
             </el-carousel>
-            
-            <!-- 搜索和添加商品 -->
-            <el-row :gutter="20">
-                <!-- 搜索框 -->
-                <el-col :span="8">
-                    <el-input v-model="food_name" placeholder="请输入搜索菜品名称" clearable @clear="getFoodList">
-                        <el-button slot="append" icon="el-icon-search" @click="getFoodList"></el-button>
-                    </el-input>
-                </el-col>
-            </el-row>
 
-            <!-- 标签页 -->
-            <el-tabs tab-position="left" style="height: 400px;" v-model="activeIndex" @tab-click="tabClick">
-                <!-- 新鲜蔬菜 -->
-                <el-tab-pane label="新鲜蔬菜" name="1">
+            <el-container>
+                <el-header>
+                    <!-- 搜索和添加商品 -->
                     <el-row :gutter="20">
-                      <el-col :span="8" v-for="(item, index) in foodList" :key="index">
-                        <el-card :body-style="{ padding: '0px' }">
-                          <img :src="item.food_pics" class="image">
-                          <div style="padding: 14px;">
-                            <span>{{item.food_name}}</span>
-                            <div class="bottom clearfix">
-                                <time class="time">{{ item.food_price }}</time>
-                                <el-input-number v-model="num" @change="handleChange" :min="0" :max="10" class="button"></el-input-number>
-                            </div>
-                          </div>
-                        </el-card>
-                      </el-col>
+                        <!-- 搜索框 -->
+                        <el-col :span="8">
+                            <el-input v-model="food_name" placeholder="请输入搜索菜品名称" clearable @clear="getFoodList">
+                                <el-button slot="append" icon="el-icon-search" @click="getFoodList"></el-button>
+                            </el-input>
+                        </el-col>
                     </el-row>
-                    <!-- 分页 -->
-                    <div class="block">
-                        <el-pagination @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-size="queryInfo.pagesize" layout="total, prev, pager, next, jumper" :total="total">
-                        </el-pagination>
-                    </div>
-                </el-tab-pane>
-
-                <!-- 主食 -->
-                <el-tab-pane label="主食" name="2">
-                    <el-row :gutter="20">
-                      <el-col :span="8" v-for="(item, index) in foodList" :key="index">
-                        <el-card :body-style="{ padding: '0px' }">
-                          <img :src="item.food_pics" class="image">
-                          <div style="padding: 14px;">
-                            <span>{{item.food_name}}</span>
-                            <div class="bottom clearfix">
-                                <time class="time">{{ item.food_price }}</time>
-                                <el-input-number v-model="num" @change="handleChange" :min="0" :max="10" class="button"></el-input-number>
-                            </div>
-                          </div>
-                        </el-card>
-                      </el-col>
-                    </el-row>
-                    <!-- 分页 -->
-                    <div class="block">
-                        <el-pagination @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-size="queryInfo.pagesize" layout="total, prev, pager, next, jumper" :total="total">
-                        </el-pagination>
-                    </div>
-                </el-tab-pane>
-                
-                <!-- 豆制品 -->
-                <el-tab-pane label="豆制品" name="3">
-                    <el-row :gutter="20">
-                      <el-col :span="8" v-for="(item, index) in foodList" :key="index">
-                        <el-card :body-style="{ padding: '0px' }">
-                          <img :src="item.food_pics" class="image">
-                          <div style="padding: 14px;">
-                            <span>{{item.food_name}}</span>
-                            <div class="bottom clearfix">
-                                <time class="time">{{ item.food_price }}</time>
-                                <el-input-number v-model="num" @change="handleChange" :min="0" :max="10" class="button"></el-input-number>
-                            </div>
-                          </div>
-                        </el-card>
-                      </el-col>
-                    </el-row>
-                    <!-- 分页 -->
-                    <div class="block">
-                        <el-pagination @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-size="queryInfo.pagesize" layout="total, prev, pager, next, jumper" :total="total">
-                        </el-pagination>
-                    </div>
-                </el-tab-pane>
-                
-                <!-- 海鲜产品 -->
-                <el-tab-pane label="海鲜产品" name="4">
-                    <el-row :gutter="20">
-                      <el-col :span="8" v-for="(item, index) in foodList" :key="index">
-                        <el-card :body-style="{ padding: '0px' }">
-                          <img :src="item.food_pics" class="image">
-                          <div style="padding: 14px;">
-                            <span>{{item.food_name}}</span>
-                            <div class="bottom clearfix">
-                                <time class="time">{{ item.food_price }}</time>
-                                <el-input-number v-model="num" @change="handleChange" :min="0" :max="10" class="button"></el-input-number>
-                            </div>
-                          </div>
-                        </el-card>
-                      </el-col>
-                    </el-row>
-                    <!-- 分页 -->
-                    <div class="block">
-                        <el-pagination @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-size="queryInfo.pagesize" layout="total, prev, pager, next, jumper" :total="total">
-                        </el-pagination>
-                    </div>
-                </el-tab-pane>
-
-                <!-- 禽类荤菜 -->
-                <el-tab-pane label="禽类荤菜" name="5">
-                    <el-row :gutter="20">
-                      <el-col :span="8" v-for="(item, index) in foodList" :key="index">
-                        <el-card :body-style="{ padding: '0px' }">
-                          <img :src="item.food_pics" class="image">
-                          <div style="padding: 14px;">
-                            <span>{{item.food_name}}</span>
-                            <div class="bottom clearfix">
-                                <time class="time">{{ item.food_price }}</time>
-                                <el-input-number v-model="num" @change="handleChange" :min="0" :max="10" class="button"></el-input-number>
-                            </div>
-                          </div>
-                        </el-card>
-                      </el-col>
-                    </el-row>
-                    <!-- 分页 -->
-                    <div class="block">
-                        <el-pagination @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-size="queryInfo.pagesize" layout="total, prev, pager, next, jumper" :total="total">
-                        </el-pagination>
-                    </div>
-                </el-tab-pane>
-
-                <!-- 汤、羹类 -->
-                <el-tab-pane label="汤、羹类" name="6">汤、羹类</el-tab-pane>
-
-                <!-- 面食 -->
-                <el-tab-pane label="面食" name="7">面食</el-tab-pane>
-
-                <!-- 凉菜 -->
-                <el-tab-pane label="凉菜" name="8">凉菜</el-tab-pane>
-
-                <!-- 水果 -->
-                <el-tab-pane label="水果" name="9">水果</el-tab-pane>
-
-                <!-- 饮料 -->
-                <el-tab-pane label="饮料" name="10">饮料</el-tab-pane>
-            </el-tabs>
+                </el-header>
+                <el-container>
+                    <el-aside width="100px">
+                            <el-menu :default-active="nowActive" class="el-menu-vertical-demo" @select="selectMenu">
+                                <el-menu-item :index="index" :key="index" v-for="(item, index) in foodCate">
+                                <span slot="title">{{item}}</span>
+                            </el-menu-item>
+                        </el-menu>
+                    </el-aside>
+                    <el-main>
+                        <el-row :gutter="20">
+                            <el-col :span="8" v-for="(item, index) in foodList" :key="index">
+                                <el-card :body-style="{ padding: '0px' }">
+                                    <img :src="item.food_pics" class="image">
+                                    <div style="padding: 14px;">
+                                        <span>{{item.food_name}}</span>
+                                        <div class="bottom clearfix">
+                                        <time class="time">{{ item.food_price }}</time>
+                                        <el-input-number v-model="selectFood[item.food_id]" @change="handleChange" :min="0" :max="10" class="button"></el-input-number>
+                                         </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                        <!-- 分页 -->
+                        <div class="block">
+                            <el-pagination @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-size="queryInfo.pagesize" layout="total, prev, pager, next, jumper" :total="total">
+                            </el-pagination>
+                            <el-badge class="item" :value="totalFoodNum" :hidden="totalFoodNum === 0 ? true:false">
+                                <el-button class="share-button"  icon="el-icon-shopping-cart-2" type="default" @click="drawer = true"></el-button>
+                            </el-badge>
+                        </div>
+                    </el-main>
+                </el-container>
+            </el-container>
         </el-card>
+
+        <!-- 购物车抽屉 -->
+        <el-drawer :visible.sync="drawer" :direction="direction">
+            <el-table :data="order" stripe>
+                <el-table-column prop="food_name" label="菜品名称" width="150"></el-table-column>
+                <el-table-column prop="number" label="菜品数量" width="200"></el-table-column>
+                <el-table-column prop="total_price" label="菜品总价"></el-table-column>
+            </el-table>
+            <el-divider></el-divider>
+            <div class="money">
+                <h3>总价为：</h3>
+                <h3>{{totalPrice}}元</h3>
+            </div>
+            <div class="submitMenu">
+                <el-button type="primary" icon="el-icon-edit" @click="submitMenu">提交订单</el-button>
+            </div>
+        </el-drawer>
     </div>
 </template>
 
@@ -183,7 +104,6 @@
             return {
                 // 获取参数
                 queryInfo: {
-                    
                     // 当前页码
                     pagenum: 1,
                     // 每页显示
@@ -195,17 +115,39 @@
                 food_name: '',
                 // 总记录数
                 total: 0,
-                // tabs当前激活项
-                activeIndex: '1',
                 // 菜品列表
                 foodList: [],
-                num: 0
+                foodCate: {
+                    1:  '新鲜蔬菜',
+                    2: '主食',
+                    3: '豆制品',
+                    4: '海鲜产品',
+                    5: '禽类荤菜',
+                    6: '汤、羹类',
+                    7: '面食',
+                    8: '凉菜',
+                    9: '水果',
+                    10: '饮料'
+                },
+                // 当前菜品种类
+                nowActive: '1',
+                // 选择的菜品数量
+                selectFood: [],
+                // 每个菜品的总价
+                selectFoodTotalPrice: [],
+                // 每个菜品的单价
+                foodPrice: [],
+                // 控制购物车的显示
+                drawer: false,
+                // 购物车从下往上显示
+                direction: 'rtl'
             }
         },
         methods: {
             async getFoodList(){
                 let query = {}
                 if(this.food_name !== ''){
+                    this.queryInfo.pagenum = 1
                     query = {
                         "pagenum": this.queryInfo.pagenum,
                         "pagesize": this.queryInfo.pagesize,
@@ -218,12 +160,18 @@
                         "cate": this.cate
                     }
                 }
-                const ret = await this.axios.get('food/list', { params: query})
+                const ret = await this.axios.get('food/list', { params: query })
                 if(ret.meta.status !== 200){
                     return this.$message.error('菜品获取失败！')
                 }
                 this.foodList = ret.data.food
                 this.total = ret.data.total
+                for (var i = 0; i < this.foodList.length; i++) {
+                    this.foodPrice[this.foodList[i].food_id] = {
+                        'food_price': this.foodList[i].food_price,
+                        'food_name': this.foodList[i].food_name
+                    }
+                }
             },
             // 监听页码改变
             handleCurrentChange(newPage){
@@ -232,17 +180,80 @@
             },
             // 监听商品数量改变
             handleChange(){
-
+                // 计算数量改变后每个菜品的总价
+                for (var i = 0; i < this.selectFoodTotalPrice.length; i++) {
+                    if(this.foodPrice[i]){
+                        this.selectFoodTotalPrice[i] = this.selectFood[i]*this.foodPrice[i].food_price
+                    }
+                }
             },
-            // 监听tabs点击事件
-            tabClick(){
-                this.cate = this.activeIndex
+            // 菜品种类改变
+            selectMenu(index){
+                this.queryInfo.pagenum = 1
+                this.cate = index
                 this.getFoodList()
+            },
+            // 提交订单
+            async submitMenu(){
+                if(this.totalFoodNum !== 0){
+                    var params = new URLSearchParams()
+                    params.append('order_price', this.totalPrice)
+                    params.append('order_desc', JSON.stringify(this.order))
+                    const ret = await this.axios.post('order/add', params)
+                    console.log(ret);
+                    if(ret.meta.status !== 200){
+                        return this.$message.error('订单提交失败！')
+                    }
+                    for (var i = 0; i < this.selectFood.length; i++) {
+                        this.selectFood[i] = 0
+                    }
+                    this.$message.success('订单提交成功！')
+                }
             }
         },
-        mounted(){
+        created(){
+            for (let i = 0; i <= 120; i++) {
+                // i是food_id, 菜品数量
+                this.selectFood[i] = 0
+                this.selectFoodTotalPrice[i] = 0
+            }
             this.getFoodList()
+        },
+        computed: {
+            // 菜品总数
+            totalFoodNum(){
+                let total = 0
+                for (var i = 0; i < this.selectFood.length; i++) {
+                    total += this.selectFood[i]
+                }
+                return total
+            },
+            // 订单详情
+            order(){
+                let order = new Array()
+                let index = 0
+                for (var i = 0; i < this.selectFood.length; i++) {
+                    if(this.selectFood[i] !== 0){
+                        order.push ({
+                            'id': i,
+                            'food_name': this.foodPrice[i].food_name,
+                            'number': this.selectFood[i],
+                            'total_price': this.selectFoodTotalPrice[i]
+                        })
+                    }
+                }
+                return order
+            },
+            // 订单总价
+            totalPrice(){
+                let sum = 0
+                for (var i = 0; i < this.order.length; i++) {
+                    sum += this.order[i].total_price
+                }
+                return sum
+            }
         }
+
     }
 </script>
 
@@ -289,8 +300,30 @@
       clear: both
   }
 
-  .el-tabs{
-    margin-top: 15px;
+  .el-menu-item{
+    height: 40px;
+  }
+
+  .block{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .money{
+    display: flex;
+    justify-content: space-between;
+    h3{
+        padding: 0 20px;
+    }
+  }
+
+  .submitMenu{
+    display: flex;
+    justify-content: flex-end;
+    button{
+        margin-right: 20px;
+    }
   }
 
 </style>
