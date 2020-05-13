@@ -15,11 +15,12 @@
             <el-container>
                 <el-header class="content">
                     <h1>{{noticeDesc.notice_title}}</h1>
-                    <h5>发布人：{{noticeDesc.username}} 发布时间：{{noticeDesc.create_time}}</h5>
+                    <h5>发布人：{{noticeDesc.username}}    发布时间：{{noticeDesc.create_time}}</h5>
                 </el-header>
                 <el-main class="content" v-html="noticeDesc.notice_desc"></el-main>
                 <el-footer style="heigth: 500px;">
                     附件：
+                    <el-link icon="el-icon-files" :key="index" v-for="(item, index) in path" :href="'http://localhost/'+item">附件{{index+1}}</el-link>
                 </el-footer>
             </el-container>
         </el-card>
@@ -31,7 +32,9 @@
     export default {
         data(){
             return {
-                noticeDesc: []
+                noticeDesc: [],
+                // 附件路径
+                path: []
             }
         },
         methods: {
@@ -45,6 +48,8 @@
                     return this.$message.error('获取公告详情失败！')
                 }
                 this.noticeDesc = ret.data
+                this.path = ret.data.notice_file.split(',')
+                console.log(this.path)
             },
             // 返回公告页
             goBack(){
@@ -76,5 +81,9 @@
             margin-top: -10px;
             color: #999;
         }
+    }
+
+    .el-link{
+        margin-right: 15px;
     }
 </style>
