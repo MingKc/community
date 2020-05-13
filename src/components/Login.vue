@@ -28,7 +28,7 @@
     <div class="register-box reverse">
       <!-- 头像 -->
       <div class="logo-box">
-        <img src="../assets/logo.jpg" @click="reverse">
+        <img src="../assets/register.jpg" @click="reverse">
       </div>
       <!-- 注册表单 -->
       <el-form ref="registerFormRef" label-width="0px" :model="registerForm" :rules="registerCheck" status-icon class="login-form">
