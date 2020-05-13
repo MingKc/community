@@ -8,6 +8,10 @@ import Estimate from '../components/Health/Estimate.vue'
 import History from '../components/Health/History.vue'
 import Food from '../components/Food/Food.vue'
 import Order from '../components/Order/Order.vue'
+import Notice from '../components/Notice/Notice.vue'
+import Desc from '../components/Notice/Desc.vue'
+import NoticeList from '../components/Notice/NoticeList.vue'
+import Add from '../components/Notice/Add.vue'
 
 Vue.use(VueRouter)
 
@@ -25,7 +29,11 @@ const router = new VueRouter({
             { path: '/estimate', component: Estimate },
             { path: '/History', component: History },
             { path: '/food', component: Food },
-            { path: '/order', component: Order }
+            { path: '/order', component: Order },
+            { path: '/notice', component: Notice },
+            { path: '/notice/desc', component: Desc },
+            { path: '/noticelist', component: NoticeList },
+            { path: '/noticelist/add', component: Add }
     ]}
   ]
 })

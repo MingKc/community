@@ -44,7 +44,10 @@ import {
   Badge,
   Drawer,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Link,
+  PageHeader,
+  Footer
 } from 'element-ui'
 
 Vue.use(Button)
@@ -90,6 +93,9 @@ Vue.use(Badge)
 Vue.use(Drawer)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Link)
+Vue.use(PageHeader)
+Vue.use(Footer)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

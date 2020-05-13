@@ -14,7 +14,7 @@
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password" prefix-icon="el-icon-orange" type="password"></el-input>
+          <el-input v-model="loginForm.password" prefix-icon="el-icon-orange" show-password></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
@@ -38,11 +38,11 @@
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input v-model="registerForm.password" prefix-icon="el-icon-orange" type="password"></el-input>
+          <el-input v-model="registerForm.password" prefix-icon="el-icon-orange" show-password></el-input>
         </el-form-item>
         <!-- 确认密码 -->
         <el-form-item prop="repassword">
-          <el-input v-model="registerForm.repassword" prefix-icon="el-icon-orange" type="password"></el-input>
+          <el-input v-model="registerForm.repassword" prefix-icon="el-icon-orange" show-password></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">

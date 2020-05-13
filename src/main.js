@@ -9,6 +9,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 导入全局样式表
 import './assets/css/global.css'
 
+// 导入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+// 导入富文本编辑器对应样式
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
+
 // 导入进度条Nprogress对应的js和css
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -22,8 +29,6 @@ axios.interceptors.request.use(function (config) {
   NProgress.start()
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
-}, function (error) {
-    return Promise.reject(error)
 })
 // axios响应拦截器   隐藏进度条NProgress.done()
 axios.interceptors.response.use(function (result) {
@@ -37,11 +42,12 @@ axios.interceptors.response.use(function (result) {
   }else{
     return data
   }
-}, function (error) {
-    return Promise.reject(error)
 })
 // 在Vue原型挂载axios
 Vue.prototype.axios = axios
+
+// 将富文本编辑器注册成全局可用组件
+Vue.use(VueQuillEditor)
 
 Vue.config.productionTip = false
 

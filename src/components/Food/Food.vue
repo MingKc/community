@@ -3,7 +3,7 @@
         <!-- 面包屑导航 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/health">饮食服务</a></el-breadcrumb-item>
+            <el-breadcrumb-item><a href="#/food">饮食服务</a></el-breadcrumb-item>
             <el-breadcrumb-item><a href="/">订餐服务</a></el-breadcrumb-item>
         </el-breadcrumb>
 
@@ -208,6 +208,7 @@
                         this.selectFood[i] = 0
                     }
                     this.$message.success('订单提交成功！')
+                    this.drawer = false
                 }
             }
         },
