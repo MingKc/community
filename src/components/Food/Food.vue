@@ -147,7 +147,6 @@
             async getFoodList(){
                 let query = {}
                 if(this.food_name !== ''){
-                    this.queryInfo.pagenum = 1
                     query = {
                         "pagenum": this.queryInfo.pagenum,
                         "pagesize": this.queryInfo.pagesize,

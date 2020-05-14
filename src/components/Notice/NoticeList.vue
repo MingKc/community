@@ -17,7 +17,7 @@
                         <el-button slot="append" icon="el-icon-search" @click="getNoticeList"></el-button>
                     </el-input>
                 </el-col>
-                <!-- 添加用户按钮 -->
+                <!-- 添加公告按钮 -->
                 <el-col :span="4">
                     <el-button type="primary" @click="addNotice">添加公告</el-button>
                 </el-col>

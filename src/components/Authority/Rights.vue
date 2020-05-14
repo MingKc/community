@@ -1,5 +1,11 @@
 <template>
     <div>
+        <!-- 回到顶部 -->
+        <el-backtop :bottom="160">
+            <div class="backtop">
+                UP
+            </div>
+        </el-backtop>
         <!-- 面包屑导航 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
@@ -54,4 +60,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+    .backtop{
+        height: 100%;
+        width: 100%;
+        background-color: #f2f5f6;
+        box-shadow: 0 0 6px rgba(0,0,0, .12);
+        text-align: center;
+        line-height: 40px;
+        color: #1989fa;
+    }
 </style>

@@ -59,13 +59,13 @@
                 this.total = ret.data.total
             },
             // 监听pagesize的改变
-            handleSizeChange: function (newSize) {
+            handleSizeChange(newSize) {
                 this.queryInfo.pagesize = newSize
                 // 重新渲染页面数据
                 this.getNoticeList()
             },
             // 监听页码改变
-            handleCurrentChange: function (newPage) {
+            handleCurrentChange(newPage) {
                 this.queryInfo.pagenum = newPage
                 // 重新渲染页面数据
                 this.getNoticeList()

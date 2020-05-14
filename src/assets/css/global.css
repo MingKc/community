@@ -34,3 +34,8 @@ body .el-table th.gutter{
 .ql-editor{
     min-height: 300px;
 }
+
+/*步骤条*/
+.el-steps{
+    margin: 15px 0;
+}
