@@ -45,7 +45,6 @@ export default {
                 return this.$message.error('获取权限列表失败！')
             }
             this.rightsList = ret.data
-            console.log(this.rightsList)
         }
     },
     created: function () {

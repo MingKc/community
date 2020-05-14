@@ -28,7 +28,6 @@ import echarts from 'echarts'
                 if(ret.meta.status !== 200){
                     return this.$message.error('健康历史数据获取失败！')
                 }
-                console.log(ret.data)
                 myChart.setOption(ret.data)
             }
         },
