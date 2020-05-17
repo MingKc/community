@@ -49,7 +49,8 @@ import {
   Footer,
   Backtop,
   Steps,
-  Step
+  Step,
+  Slider
 } from 'element-ui'
 
 Vue.use(Button)
@@ -100,6 +101,7 @@ Vue.use(Footer)
 Vue.use(Backtop)
 Vue.use(Steps)
 Vue.use(Step)
+Vue.use(Slider)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

@@ -16,6 +16,12 @@
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" prefix-icon="el-icon-orange" show-password></el-input>
         </el-form-item>
+<!--           <div class="box">
+            <div class="check">
+              <el-slider v-model="loginForm.value" :show-tooltip="false" @change="checkValue" :disabled="loginForm.able"></el-slider>
+            </div>
+            <span v-text="loginForm.tip"></span>
+          </div> -->
         <!-- 按钮 -->
         <el-form-item class="btns">
           <el-button type="primary" @click="login">登录</el-button>
@@ -58,10 +64,24 @@
 <script>
   export default {
     data(){
-      const reg = /(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%^&*?]{6,18}$/
+      const passreg = /(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%^&*?]{6,18}$/
+      const namereg = /(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%^&*?]{6,12}$/
+      var validateUsername = async (rule, value, callback) => {
+        if (!namereg.test(value)) {
+          callback(new Error('请输入用户名,用户名由6-12位数字、字母或字符组成！'))
+        } else {
+          var params = new URLSearchParams()
+          params.append('username', value)
+          const ret = await this.axios.post('user/check', params)
+          if(ret.meta.status !== 200){
+            callback(new Error('用户名已存在，请重新输入！'))
+          }
+          callback()
+        }
+      }
       var validatePass = (rule, value, callback) => {
-        if (!reg.test(value)) {
-          callback(new Error('请输入密码,密码由6-12位数字、字母或字符组成！'))
+        if (!passreg.test(value)) {
+          callback(new Error('请输入密码,密码由6-18位数字、字母或字符组成！'))
         } else {
           if (this.registerForm.password !== '') {
             this.$refs.registerFormRef.validateField('repassword')
@@ -70,7 +90,7 @@
         }
       }
       var validatePass2 = (rule, value, callback) => {
-        if (!reg.test(value)) {
+        if (!passreg.test(value)) {
           callback(new Error('请再次输入密码！'))
         } else if (value !== this.registerForm.password) {
           callback(new Error('两次输入密码不一致!'))
@@ -84,7 +104,11 @@
       // 登录表单数据绑定
       loginForm: {
         username: '',
-        password: ''
+        password: '',
+        // 滑动验证
+        value: 0,
+        able: false,
+        tip: '请滑动验证！'
       },
       // 注册表单数据绑定
       registerForm: {
@@ -109,8 +133,7 @@
       registerCheck: {
         // 用户名
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
+          { validator: validateUsername, trigger: 'blur' }
         ],
         // 密码
         password: [
@@ -195,6 +218,15 @@
         },1000)
         this.resetRegister()
       }
+    },
+    // 滑动
+    checkValue(){
+      if(this.loginForm.value !== 100){
+        this.loginForm.value = 0
+      }else{
+        this.loginForm.able = true
+        this.loginForm.tip = '验证通过！'
+      }
     }
   }
 }
@@ -271,5 +303,18 @@
   .btns{
     display: flex;
     justify-content: flex-end;
+  }
+  
+  .box{
+    display: flex;
+    span{
+      margin-left: 20px;
+      line-height: 32px;
+      color: #AAA;
+    }
+  }
+
+  .check{
+    width: 180px;
   }
 </style>
