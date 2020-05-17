@@ -22,7 +22,7 @@
                         <el-row :class="['borderbottom', index1 === 0? 'bordertop':'', 'position']" v-for="(rights, index1) in rightsInfo.row.children" :key="rights.id">
                             <!-- 一级权限 -->
                             <el-col :span="5">
-                                <el-tag closable>{{rights.auth_name}}</el-tag>
+                                <el-tag>{{rights.auth_name}}</el-tag>
                                 <i class="el-icon-caret-right"></i>
                             </el-col>
                             <!-- 二级权限和三级权限 -->
@@ -30,12 +30,12 @@
                                 <el-row :class="[index2 === 0? '':'bordertop', 'position']" v-for="(item, index2) in rights.children" :key="item.id">
                                     <!-- 二级权限 -->
                                     <el-col :span="6">
-                                        <el-tag closable type="success">{{item.auth_name}}</el-tag>
+                                        <el-tag type="success">{{item.auth_name}}</el-tag>
                                         <i class="el-icon-caret-right"></i>
                                     </el-col>
                                     <!-- 三级权限 -->
                                     <el-col :span="18">
-                                        <el-tag closable type="warning" v-for="(item3) in item.children" :key="item3.id" @close="remove(rightsInfo.row, item3.id)">{{item3.auth_name}}</el-tag>
+                                        <el-tag type="warning" v-for="(item3) in item.children" :key="item3.id">{{item3.auth_name}}</el-tag>
                                     </el-col>
                                 </el-row>
                             </el-col>
@@ -150,7 +150,7 @@ export default {
     },
     methods: {
         // 查询角色信息
-        queryRoles: async function () {
+        async queryRoles() {
             const ret = await this.axios.get('role/list')
             if (ret.meta.status !== 200) {
                 return this.$message.error('获取角色列表失败！')
@@ -158,7 +158,7 @@ export default {
             this.rolesList = ret.data
         },
         // 打开编辑角色对话框并渲染数据
-        showEditRole: async function (id) {
+        async showEditRole(id) {
             const ret = await this.axios.get('role/list', { params: { role_id: id } })
             if (ret.meta.status === 200) {
                 this.editRoles = ret.data
@@ -166,11 +166,11 @@ export default {
             }
         },
         // 重置编辑角色表单
-        editClosed: function () {
+        editClosed() {
             this.$refs.editRolesRef.resetFields()
         },
         // 提交编辑角色信息
-        editRolesEvent: function () {
+        editRolesEvent() {
             // 表单预校验
             this.$refs.editRolesRef.validate(async value => {
                 if (value) {
@@ -189,7 +189,7 @@ export default {
             })
         },
         // 删除角色
-        deleteRole: async function (id) {
+        async deleteRole(id) {
             const tip = await this.$confirm('此操作将永久删除该角色, 是否继续?', '提示', {
               confirmButtonText: '确定',
               cancelButtonText: '取消',
@@ -206,11 +206,11 @@ export default {
             }
         },
         // 重置添加角色表单
-        addClosed: function () {
+        addClosed() {
             this.$refs.addRolesRef.resetFields()
         },
         // 添加用户表单
-        addRolesEvent: function () {
+        addRolesEvent() {
             // 表单预校验
             this.$refs.addRolesRef.validate(async value => {
                 if (value) {
@@ -228,26 +228,8 @@ export default {
                 }
             })
         },
-        // 移出权限
-        remove: async function (rightData, id) {
-            const tip = await this.$confirm('此操作将删除该权限, 是否继续?', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).catch(err => err)
-            // 确定删除返回confirm，取消返回cancel
-            if (tip === 'confirm') {
-                const ret = await this.axios.delete(`roles/${rightData.id}/rights/${id}`)
-                if (ret.meta.status !== 200) {
-                    return
-                }
-                this.$message.success('权限移出成功！')
-                // 不刷新列表直接更新数据
-                rightData.children = ret.data
-            }
-        },
         // 显示分配权限
-        setRights: async function (role) {
+        async setRights(role) {
             this.roleId = role.role_id
             // 加载所有权限
             const ret = await this.axios.get('auth/showlist', { params: { type: 'tree' }})
@@ -257,7 +239,6 @@ export default {
             this.setRightsData = ret.data
             // 直接获取三级权限节点值
             this.findRights(role, this.defaultKeys)
-            console.log(this.defaultKeys)
             this.setRightsDialogVisible = true
         },
         // 递归查找先有角色的所有权限
@@ -268,7 +249,7 @@ export default {
             node.children.forEach(childNode => this.findRights(childNode, arr))
         },
         // 关闭分配权限对话框重置对话框
-        setRightsDialogClosed: function () {
+        setRightsDialogClosed() {
             this.defaultKeys = []
         },
         // 提交分配权限
@@ -278,11 +259,14 @@ export default {
                 ...this.$refs.setRightsRef.getHalfCheckedKeys(),
                 ...this.$refs.setRightsRef.getCheckedKeys()
             ]
-            // 拼接权限id
+            // id排序保证菜单栏输出顺序
+            choice.sort();
+            // 拼接权限ids
             const str = choice.join(',')
-            const ret = await this.axios.post(`roles/${this.roleId}/rights`, {
-                rids: str
-            })
+            var params = new URLSearchParams()
+            params.append('role_id', this.roleId)
+            params.append('role_auth_ids', str)
+            const ret = await this.axios.post('role/auth', params)
             if (ret.meta.status !== 200) {
                 return this.$message.error('权限分配失败！')
             }
@@ -291,7 +275,7 @@ export default {
             this.setRightsDialogVisible = false
         }
     },
-    mounted: function () {
+    created: function () {
         this.queryRoles()
     }
 }
