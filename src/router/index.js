@@ -16,6 +16,7 @@ import NoticeList from '../components/Notice/NoticeList.vue'
 import Add from '../components/Notice/Add.vue'
 import Rights from '../components/Authority/Rights.vue'
 import Role from '../components/Authority/Role.vue'
+import User from '../components/Authority/User.vue'
 
 Vue.use(VueRouter)
 
@@ -41,7 +42,8 @@ const router = new VueRouter({
             { path: '/noticelist', component: NoticeList },
             { path: '/noticelist/add', component: Add },
             { path: '/rights', component: Rights },
-            { path: '/role', component: Role }
+            { path: '/role', component: Role },
+            { path: '/user', component: User }
     ]}
   ]
 })
