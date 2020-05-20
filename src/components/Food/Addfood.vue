@@ -127,7 +127,6 @@
             // 图片上传成功
             uploadSuccess: function (response) {
                 this.addForm.food_pics = response 
-                console.log(this.addForm.food_pics)
             },
             // 文件上传超过限制
             handleExceed(files, fileList) {

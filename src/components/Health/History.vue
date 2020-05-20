@@ -37,4 +37,10 @@ import echarts from 'echarts'
     }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+    .el-card{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

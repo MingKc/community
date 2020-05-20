@@ -15,17 +15,21 @@
             <h1>评估建议：</h1>
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="12">
-                    <el-card :key="index" v-for="(item,index) in suggest">
-                        <h3 v-if="index === 0">运动</h3>
-                        <el-divider v-if="index !== 0"></el-divider>
-                        <h4>{{index+1}}、{{item.suggest}}</h4>
+                    <el-card>
+                        <div :key="index" v-for="(item,index) in sportSuggest">
+                            <h3 v-if="index === 0">运动</h3>
+                            <el-divider v-if="index !== 0"></el-divider>
+                            <h4>{{index+1}}、{{item.suggest}}</h4>
+                        </div>
                     </el-card>
                 </el-col>
                 <el-col :xs="24" :sm="12">
-                    <el-card :key="index" v-for="(item,index) in suggest">
-                        <h3 v-if="index === 0">饮食</h3>
-                        <el-divider v-if="index !== 0"></el-divider>
-                        <h4>{{index+1}}、{{item.suggest}}</h4>
+                    <el-card>
+                        <div :key="index" v-for="(item,index) in foodSuggest">
+                            <h3 v-if="index === 0">饮食</h3>
+                            <el-divider v-if="index !== 0"></el-divider>
+                            <h4>{{index+1}}、{{item.suggest}}</h4>
+                        </div>
                     </el-card>
                 </el-col>
             </el-row>
@@ -39,8 +43,10 @@
             return {
                 // 健康评分等级
                 value: 0,
-                // 评估建议
-                suggest: []
+                // 运动建议
+                sportSuggest: [],
+                // 饮食建议
+                foodSuggest: []
             }
         },
         methods: {
@@ -51,7 +57,13 @@
                     return this.$message.error('健康评估信息获取失败！')
                 }
                 this.value = result.data.grade
-                this.suggest = result.data.suggest
+                result.data.suggest.forEach(item => {
+                    if(item.type === 0){
+                        this.foodSuggest.push(item)
+                    }else if(item.type === 1){
+                        this.sportSuggest.push(item)
+                    }
+                })
             }
         },
         created(){

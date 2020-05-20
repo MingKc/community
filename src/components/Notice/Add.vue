@@ -108,7 +108,6 @@
                 }
                 this.addNoticeForm.notice_title = ret.data.notice_title
                 this.addNoticeForm.notice_desc = ret.data.notice_desc
-                console.log(ret.data)
             },
             // 附件预览效果事件
             handlePreview: function (file) {
@@ -125,7 +124,7 @@
                 // 从数组中移出临时路径
                 this.addNoticeForm.notice_file.splice(index, 1)
             },
-            // 图片上传成功
+            // 附件上传成功
             uploadSuccess: function (response) {
                 // 添加每个上传的附件路径
                 this.addNoticeForm.notice_file.push(response)

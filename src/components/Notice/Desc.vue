@@ -20,7 +20,7 @@
                 <el-main class="content" v-html="noticeDesc.notice_desc"></el-main>
                 <el-footer style="heigth: 500px;">
                     附件：
-                    <el-link icon="el-icon-files" :key="index" v-for="(item, index) in path" :href="'http://localhost/'+item">附件{{index+1}}</el-link>
+                    <el-link icon="el-icon-files" v-if="path[0] !== '[]'" :key="index" v-for="(item, index) in path" :href="'http://localhost/'+item">附件{{index+1}}</el-link>
                 </el-footer>
             </el-container>
         </el-card>
@@ -49,7 +49,6 @@
                 }
                 this.noticeDesc = ret.data
                 this.path = ret.data.notice_file.split(',')
-                console.log(this.path)
             },
             // 返回公告页
             goBack(){

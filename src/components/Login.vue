@@ -16,13 +16,6 @@
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" prefix-icon="el-icon-orange" show-password></el-input>
         </el-form-item>
-<!--           <div class="box">
-            <div class="check">
-              <el-slider v-model="loginForm.value" :show-tooltip="false" @change="checkValue" :disabled="loginForm.able"></el-slider>
-            </div>
-            <span v-text="loginForm.tip"></span>
-          </div> -->
-        <!-- 按钮 -->
         <el-form-item class="btns">
           <el-button type="primary" @click="login">登录</el-button>
           <el-button type="info" @click="resetLogin">重置</el-button>
@@ -120,13 +113,11 @@
       loginCheck: {
         // 用户名
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         // 密码
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 18, message: '长度在 6 到 18 个字符', trigger: 'blur' }
+          { required: true, message: '请输入密码', trigger: 'blur' }
         ]
       },
       // 注册验证
@@ -218,15 +209,6 @@
         },1000)
         this.resetRegister()
       }
-    },
-    // 滑动
-    checkValue(){
-      if(this.loginForm.value !== 100){
-        this.loginForm.value = 0
-      }else{
-        this.loginForm.able = true
-        this.loginForm.tip = '验证通过！'
-      }
     }
   }
 }
@@ -303,18 +285,5 @@
   .btns{
     display: flex;
     justify-content: flex-end;
-  }
-  
-  .box{
-    display: flex;
-    span{
-      margin-left: 20px;
-      line-height: 32px;
-      color: #AAA;
-    }
-  }
-
-  .check{
-    width: 180px;
   }
 </style>

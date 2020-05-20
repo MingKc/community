@@ -44,7 +44,7 @@
             </el-table>
 
             <!-- 分页 -->
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 5, 10]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="totalPage">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[3, 5, 10, 15]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="totalPage">
             </el-pagination>
 
             <!-- 分配角色对话框 -->
@@ -54,7 +54,7 @@
                     <p>当前角色：{{userRole.role_name}}</p>
                     <p>分配新角色：
                         <el-select v-model="selectedRoleId" placeholder="请选择">
-                            <el-option v-for="item in rolesList" :key="item.id" :label="item.roleName"   :value="item.id">
+                            <el-option v-for="item in rolesList" :key="item.role_id" :label="item.role_name" :value="item.role_id">
                             </el-option>
                         </el-select>
                     </p>
@@ -78,7 +78,7 @@ export default {
                // 当前页码
                pagenum: 1,
                // 每页显示条数
-               pagesize: 2
+               pagesize: 5
             },
             // 用户数据列表
             userList: [],
@@ -87,7 +87,7 @@ export default {
             // 当前用户角色
             userRole: {},
             // 所有角色列表
-            rolesList: {},
+            rolesList: [],
             // 控制分配角色对话框
             setRolesDialogVisible: false,
             // 新分配的角色ID

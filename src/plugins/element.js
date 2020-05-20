@@ -50,7 +50,8 @@ import {
   Backtop,
   Steps,
   Step,
-  Slider
+  Slider,
+  Notification
 } from 'element-ui'
 
 Vue.use(Button)
@@ -105,3 +106,4 @@ Vue.use(Slider)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$notify = Notification

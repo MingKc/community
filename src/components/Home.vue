@@ -105,13 +105,23 @@ export default {
       window.sessionStorage.setItem('active', path)
       // 切换当前选择的菜单
       this.nowActive = path
+    },
+    // 监督运动
+    sports(){
+      const h = this.$createElement
+      this.$notify({
+        title: '健康生活',
+        message: h('i', { style: 'color: teal'}, '今天你运动了嘛？每天运动半小时，健康愉悦一整天！')
+      })
     }
   },
-  mounted () {
+  mounted() {
     // 加载左侧菜单栏
     this.showMenu()
     // 后退到上一步选择的菜单栏
     this.nowActive = window.sessionStorage.getItem('active')
+    // 弹出监督运动
+    this.sports()
   }
 }
 </script>

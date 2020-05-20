@@ -87,7 +87,6 @@
                     return this.$message.error('订单详情获取失败！')
                 }
                 this.orderDesc = ret.data
-                console.log(this.orderDesc)
                 this.descDialogVisible = true
             },
             // 监听pagesize改变

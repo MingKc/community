@@ -199,7 +199,6 @@
                     params.append('order_price', this.totalPrice)
                     params.append('order_desc', JSON.stringify(this.order))
                     const ret = await this.axios.post('order/add', params)
-                    console.log(ret);
                     if(ret.meta.status !== 200){
                         return this.$message.error('订单提交失败！')
                     }

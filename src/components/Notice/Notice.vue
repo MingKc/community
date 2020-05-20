@@ -72,7 +72,6 @@
             },
             // 查看公告详情
             showDesc(noticeId){
-                console.log(noticeId)
                 this.$router.push('/notice/desc?notice_id=' + noticeId)
             }
         },
