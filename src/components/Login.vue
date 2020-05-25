@@ -217,7 +217,8 @@
 <style lang="less" scoped>
   .login-container{
     height: 100%;
-    background-color:#242662;
+    background: url(../assets/6.jpg);
+    background-size:cover;
   }
 
   .register-box{
